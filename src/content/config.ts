@@ -10,6 +10,16 @@ const projectsCollection = defineCollection({
     }),
 });
 
+const postsCollection = defineCollection({
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      pubDate: z.date(),
+      featuredImage: image(),
+    }),
+});
+
 export const collections = {
   projects: projectsCollection,
+  posts: postsCollection,
 };

@@ -73,6 +73,7 @@ body {
   font-size: 18px;
   line-height: 1.5;
   text-wrap: pretty;
+  overflow: hidden;
 
   @media (max-width: 750px) {
     font-size: 16px;
@@ -132,7 +133,15 @@ h1,
 h2,
 h3 {
   margin: 2rem 0 0.5rem;
-  font-weight: 700;
+  font-weight: 800;
+
+  &:first-child {
+    margin: 0 0 0.5rem;
+  }
+}
+
+section + section {
+  margin-top: 2rem;
 }
 
 button {
@@ -172,4 +181,14 @@ a:not([class]) {
       }
     }
   }
+}
+
+#cursor {
+  position: absolute;
+  display: block;
+  width: 0.75rem;
+  height: 0.75rem;
+  background-color: var(--alt-color);
+  border-radius: 50%;
+  z-index: 2;
 }
