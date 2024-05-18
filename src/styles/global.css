@@ -1,0 +1,175 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+}
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* sen-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Sen";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/sen-v9-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* sen-700 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Sen";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../fonts/sen-v9-latin-700.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* sen-800 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Sen";
+  font-style: normal;
+  font-weight: 800;
+  src: url("../fonts/sen-v9-latin-800.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+:root {
+  --text-color: #303030;
+  --accent-color: #004c99;
+  --alt-color: #ff8566;
+  --background: #ececeb;
+  --inline-padding: clamp(2rem, 5vw, 3rem);
+}
+
+body {
+  background-color: var(--background);
+  font-family: "Sen", sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  text-wrap: pretty;
+
+  @media (max-width: 750px) {
+    font-size: 16px;
+  }
+
+  @media (max-width: 550px) {
+    font-size: 14px;
+  }
+}
+
+#container {
+  position: relative;
+  display: grid;
+  grid-template-rows: min-content 1fr min-content;
+  gap: 2rem;
+  width: 100%;
+  max-width: 950px;
+  min-height: 100vh;
+  margin-inline: auto;
+  padding: 2rem;
+  color: var(--text-color);
+  overflow: hidden;
+
+  > * {
+    max-width: 650px;
+  }
+
+  @media (max-width: 550px) {
+    padding: 1rem 1.5rem;
+  }
+}
+
+main {
+  width: 100%;
+  overflow: hidden;
+
+  p,
+  ul,
+  ol {
+    margin: 0.5rem 0 1rem;
+  }
+}
+
+h1 {
+  font-size: 1.476rem;
+}
+
+h2 {
+  font-size: 1.138rem;
+}
+
+h3 {
+  font-size: 1rem;
+}
+
+h1,
+h2,
+h3 {
+  margin: 2rem 0 0.5rem;
+  font-weight: 700;
+}
+
+button {
+  cursor: pointer;
+}
+
+a:not([class]) {
+  position: relative;
+  color: currentColor;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -0.3rem;
+    display: block;
+    width: calc(100% + 0.6rem);
+    height: 15px;
+    background-color: var(--accent-color);
+    opacity: 0.125;
+    transform: scale(0, 1);
+    transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+    z-index: -1;
+  }
+
+  @media (hover) {
+    &:hover,
+    &:focus-within {
+      color: var(--accent-color);
+
+      &:after {
+        transform: scale(1, 1);
+      }
+    }
+  }
+}

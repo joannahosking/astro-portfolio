@@ -1,0 +1,72 @@
+---
+import Main from "../layouts/Main.astro";
+const pageTitle = "Joanna Hosking - Web Developer";
+import { Image } from 'astro:assets';
+import { getCollection } from "astro:content";
+const allProjects = await getCollection("projects");
+---
+
+<Main pageTitle={pageTitle}>
+  <section class="hero">
+    <h1>👋🏼<br />Hello, I'm Joanna.</h1>
+    <p>I'm a web developer based in the West Midlands.<br />
+    You can currently find me at <a href="https://cooperfields.co.uk/" target="_blank">Cooperfields</a>.</p>
+    <p><a href="/about">Learn more &rarr;</a></p>
+  </section>
+  <section class="projects">
+    <h2>Projects</h2>
+    <ul>
+      {allProjects.map((project) => <li><p><figure class="icon"><Image src={project.data.icon} alt="" /></figure> <a href={`/projects/${project.slug}`}>{project.data.shortname}</a>: {project.data.description}</p></li>)}
+    </ul>
+  </section>
+  <section class="blog">
+    <h2>Thoughts</h2>
+    <ul>
+      <li></li>
+    </ul>
+  </section>
+</Main>
+
+<style>
+  section {
+    margin-block: 3rem;
+  }
+
+  .projects {
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      margin: 0.5rem 0;
+    }
+
+    .icon {
+      position: relative;
+      display: inline-block;
+      width: 1.5rem;
+      height: 1.5rem;
+      margin-right: 0.25rem;
+      padding: 0.25rem;
+      vertical-align: middle;
+      
+      &:after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: var(--alt-color);
+        border-radius: 50%;
+        opacity: 0.35;
+        z-index: -1;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+</style>
