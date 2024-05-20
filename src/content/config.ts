@@ -7,6 +7,7 @@ const projectsCollection = defineCollection({
       shortname: z.string(),
       description: z.string(),
       icon: image(),
+      sortOrder: z.number(),
     }),
 });
 
@@ -15,7 +16,6 @@ const postsCollection = defineCollection({
     z.object({
       title: z.string(),
       pubDate: z.date(),
-      featuredImage: image(),
     }),
 });
 

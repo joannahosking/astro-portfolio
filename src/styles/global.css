@@ -61,10 +61,17 @@ h6 {
 
 :root {
   --text-color: #303030;
+  --background: #ececeb;
   --accent-color: #004c99;
   --alt-color: #ff8566;
-  --background: #ececeb;
   --inline-padding: clamp(2rem, 5vw, 3rem);
+
+  @media (prefers-color-scheme: dark) {
+    --text-color: #ececeb;
+    --background: #1b1b1b;
+    --accent-color: #7daaff;
+    --alt-color: #ff8566;
+  }
 }
 
 body {
@@ -73,7 +80,7 @@ body {
   font-size: 18px;
   line-height: 1.5;
   text-wrap: pretty;
-  overflow: hidden;
+  overflow-x: hidden;
 
   @media (max-width: 750px) {
     font-size: 16px;
@@ -90,16 +97,11 @@ body {
   grid-template-rows: min-content 1fr min-content;
   gap: 2rem;
   width: 100%;
-  max-width: 950px;
+  max-width: 650px;
   min-height: 100vh;
   margin-inline: auto;
   padding: 2rem;
   color: var(--text-color);
-  overflow: hidden;
-
-  > * {
-    max-width: 650px;
-  }
 
   @media (max-width: 550px) {
     padding: 1rem 1.5rem;
@@ -118,15 +120,15 @@ main {
 }
 
 h1 {
-  font-size: 1.476rem;
+  font-size: 1.476em;
 }
 
 h2 {
-  font-size: 1.138rem;
+  font-size: 1.138em;
 }
 
 h3 {
-  font-size: 1rem;
+  font-size: 1em;
 }
 
 h1,
@@ -191,4 +193,13 @@ a:not([class]) {
   background-color: var(--alt-color);
   border-radius: 50%;
   z-index: 2;
+  pointer-events: none;
+
+  @media (hover: none) {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    display: none;
+  }
 }

@@ -36,8 +36,8 @@ const { pageTitle } = Astro.props;
 
   window.addEventListener("mousemove", (e) => {
     gsap.to("#cursor", {
-      x: e.clientX,
-      y: e.clientY,
+      x: e.pageX,
+      y: e.pageY,
       duration: 0.75,
     });
   });

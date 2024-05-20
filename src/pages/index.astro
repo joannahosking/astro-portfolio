@@ -4,15 +4,17 @@ const pageTitle = "Joanna Hosking - Web Developer";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 const allProjects = await getCollection("projects");
+allProjects.sort((a, b) => (a.data.sortOrder < b.data.sortOrder ? -1 : 1));
 const allPosts = await getCollection("posts");
+allPosts.sort((a, b) => (a.data.pubDate > b.data.pubDate ? -1 : 1));
 ---
 
 <Main pageTitle={pageTitle}>
   <section class="hero">
     <h1>👋🏼<br />Hello, I'm Joanna.</h1>
     <p>
-      I'm a web developer based in the West Midlands.<br />
-      You can currently find me at <a
+      I'm a web developer in the West Midlands, cultivating this small digital
+      garden. Professionally, you can find me at <a
         href="https://cooperfields.co.uk/"
         target="_blank">Cooperfields</a
       >.
@@ -20,7 +22,7 @@ const allPosts = await getCollection("posts");
     <p><a href="/about">Learn more &rarr;</a></p>
   </section>
   <section class="projects">
-    <h2>Projects</h2>
+    <h2>Selected projects</h2>
     <ul>
       {
         allProjects.map((project) => (
@@ -38,7 +40,7 @@ const allPosts = await getCollection("posts");
     </ul>
   </section>
   <section class="blog">
-    <h2>Thoughts</h2>
+    <h2>Notes</h2>
     <ul>
       {
         allPosts.map((post) => (
@@ -46,7 +48,10 @@ const allPosts = await getCollection("posts");
             <a href={`/posts/${post.slug}`} class="post-link">
               <>
                 <span>{post.data.title}</span>
-                <span>Read &rarr;</span>
+                <span>
+                  Read
+                  <span class="expand" /> &rarr;
+                </span>
               </>
             </a>
           </li>
@@ -90,25 +95,76 @@ const allPosts = await getCollection("posts");
       margin: 0;
       padding: 0;
       border-top: 1px solid currentColor;
-      line-height: 2;
     }
 
     li {
       border-bottom: 1px solid currentColor;
-      
+
       a {
+        position: relative;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 1rem;
+        margin-block: 0.25rem;
         color: currentColor;
         text-decoration: none;
+        overflow: hidden;
+
+        .expand {
+          transition: margin 0.25s ease-in-out;
+        }
+
+        @media (hover) {
+          &:hover,
+          &:focus-within {
+            .expand {
+              margin-left: 0.25rem;
+            }
+          }
+        }
 
         span:last-child {
           font-size: 0.9rem;
           font-weight: 700;
           text-transform: uppercase;
+          white-space: nowrap;
+
+          @media (max-width: 650px) {
+            font-size: 0.75rem;
+          }
         }
       }
     }
   }
 </style>
+
+<script>
+  import { gsap } from "gsap";
+
+  const blogItems = gsap.utils.toArray(".blog li a");
+
+  blogItems.forEach((item) => {
+    item.addEventListener("mouseenter", (e) => {
+      gsap.to("#cursor", {
+        width: "2rem",
+        height: "2rem",
+        backgroundColor: "var(--accent-color)",
+        opacity: 0.25,
+        duration: 0.25,
+        zIndex: -1,
+      });
+    });
+
+    item.addEventListener("mouseleave", (e) => {
+      gsap.to("#cursor", {
+        width: "0.75rem",
+        height: "0.75rem",
+        backgroundColor: "var(--alt-color)",
+        opacity: 1,
+        duration: 0.25,
+        zIndex: 1,
+      });
+    });
+  });
+</script>

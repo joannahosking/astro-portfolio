@@ -5,11 +5,25 @@ import { Image } from "astro:assets";
 import me from "../assets/images/me.jpg";
 const igRes = await fetch("https://feeds.behold.so/cXKKK7y6nxKVE2io1XFe");
 const igData = await igRes.json();
+const expertise = [
+  "html",
+  "css/sass",
+  "javascript",
+  "php",
+  "wordpress",
+  "react",
+  "astro",
+  "express.js",
+  "webpack",
+  "git",
+  "ux/ui",
+  "figma",
+  "adobe",
+];
 ---
 
 <Main pageTitle={pageTitle}>
   <section>
-
     <h1>About me</h1>
     <figure class="scroll">
       <Image src={me} alt="" />
@@ -23,8 +37,8 @@ const igData = await igRes.json();
       >.
     </p>
     <p>
-      I'm a University of Arizona alumni <em>(go Wildcats!)</em> and am now based in
-      the West Midlands. I love diving into new technologies and have a particular
+      I'm a University of Arizona alumni <em>(go Wildcats!)</em> and am now based
+      in the West Midlands. I love diving into new technologies and have a particular
       fondness for the latest CSS features hiding behind experimental flags.
     </p>
     <ul class="ig-feed">
@@ -50,9 +64,29 @@ const igData = await igRes.json();
   </section>
   <section>
     <h2>Experience</h2>
+    <ul class="experience">
+      <li>
+        <h3>Cooperfields</h3>
+        <span class="title">Web Developer</span>
+        <span class="date">2021-present</span>
+      </li>
+      <li>
+        <h3>Freelance</h3>
+        <span class="title">Web Developer</span>
+        <span class="date">2019-2021</span>
+      </li>
+      <li>
+        <h3>Automatit</h3>
+        <span class="title">Front-End Developer</span>
+        <span class="date">2018-2019</span>
+      </li>
+    </ul>
   </section>
   <section>
     <h2>Expertise</h2>
+    <ul class="expertise">
+      {expertise.map((item) => <li>{item}</li>)}
+    </ul>
   </section>
 </Main>
 
@@ -89,6 +123,58 @@ const igData = await igRes.json();
       object-fit: cover;
     }
   }
+
+  .experience {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      display: grid;
+      grid-template-columns: 1fr max-content;
+      gap: 0 1rem;
+      margin-block: 0.5rem;
+
+      h3 {
+        margin: 0;
+      }
+
+      .title {
+        grid-row: 2;
+        font-style: italic;
+      }
+    }
+  }
+
+  .expertise {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+
+    li {
+      position: relative;
+      display: block;
+      padding: 0.125rem 0.5rem;
+      border-radius: 2px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      white-space: nowrap;
+
+      &:after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-color: var(--accent-color);
+        opacity: 0.125;
+        z-index: -1;
+      }
+    }
+  }
 </style>
 
 <script>
@@ -96,18 +182,20 @@ const igData = await igRes.json();
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   gsap.registerPlugin(ScrollTrigger);
 
-  const figure = document.querySelector(".scroll");
-  const img = figure.querySelector("img");
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const figure = document.querySelector(".scroll");
+    const img = figure.querySelector("img");
 
-  gsap.to(img, {
-    scrollTrigger: {
-      trigger: figure,
-      start: "top 50%",
-      end: "bottom top",
-      scrub: 0.5,
-      invalidateOnRefresh: true,
-    },
-    y: figure.offsetHeight - img.offsetHeight,
-    ease: "none",
-  });
+    gsap.to(img, {
+      scrollTrigger: {
+        trigger: figure,
+        start: "top 50%",
+        end: "bottom top",
+        scrub: 1.5,
+        invalidateOnRefresh: true,
+      },
+      y: figure.offsetHeight - img.offsetHeight,
+      ease: "none",
+    });
+  }
 </script>
