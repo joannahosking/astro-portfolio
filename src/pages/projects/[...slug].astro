@@ -13,17 +13,37 @@ const { Content } = await entry.render();
 ---
 
 <Main pageTitle={`${entry.data.title} | Joanna Hosking - Web Developer`}>
-  <article>
+  <article class="project">
     <h1>{entry.data.title}</h1>
     <Content />
     <p class="go-back">
-      <a href="/">&larr; back</a>
+      <a href="/">&larr; Back to home</a>
     </p>
   </article>
 </Main>
 
 <style>
-  .go-back {
-    margin-top: 1rem;
+  .project {
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    h1 + ul {
+      list-style-type: none;
+      margin: 0 0 2rem;
+      padding: 0;
+    }
+
+    img + em {
+      margin-top: 0.125rem;
+      font-size: 0.9rem;
+    }
+
+    .go-back {
+      margin-top: 2rem;
+      text-align: right;
+    }
   }
 </style>

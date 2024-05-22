@@ -5,8 +5,8 @@ import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 const allProjects = await getCollection("projects");
 allProjects.sort((a, b) => (a.data.sortOrder < b.data.sortOrder ? -1 : 1));
-const allPosts = await getCollection("posts");
-allPosts.sort((a, b) => (a.data.pubDate > b.data.pubDate ? -1 : 1));
+// const allPosts = await getCollection("posts");
+// allPosts.sort((a, b) => (a.data.pubDate > b.data.pubDate ? -1 : 1));
 ---
 
 <Main pageTitle={pageTitle}>
@@ -39,7 +39,7 @@ allPosts.sort((a, b) => (a.data.pubDate > b.data.pubDate ? -1 : 1));
       }
     </ul>
   </section>
-  <section class="blog">
+  <!-- <section class="blog">
     <h2>Notes</h2>
     <ul>
       {
@@ -58,7 +58,7 @@ allPosts.sort((a, b) => (a.data.pubDate > b.data.pubDate ? -1 : 1));
         ))
       }
     </ul>
-  </section>
+  </section> -->
 </Main>
 
 <style>
@@ -89,7 +89,7 @@ allPosts.sort((a, b) => (a.data.pubDate > b.data.pubDate ? -1 : 1));
     }
   }
 
-  .blog {
+  /* .blog {
     ul {
       list-style-type: none;
       margin: 0;
@@ -136,7 +136,7 @@ allPosts.sort((a, b) => (a.data.pubDate > b.data.pubDate ? -1 : 1));
         }
       }
     }
-  }
+  } */
 </style>
 
 <script>
