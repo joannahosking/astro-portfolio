@@ -63,6 +63,7 @@ h6 {
   --text-color: #303030;
   --background: #ececeb;
   --accent-color: #004c99;
+  --accent-transparent: rgba(0, 76, 153, 0.125);
   --alt-color: #ff8566;
   --inline-padding: clamp(2rem, 5vw, 3rem);
 
@@ -70,6 +71,7 @@ h6 {
     --text-color: #ececeb;
     --background: #1b1b1b;
     --accent-color: #7daaff;
+    --accent-transparent: rgba(125, 170, 255, 0.125);
     --alt-color: #ff8566;
   }
 }
@@ -155,32 +157,21 @@ a:not([class]) {
   color: currentColor;
   font-weight: 700;
   text-decoration: none;
-  transition: color 0.5s cubic-bezier(0.2, 1, 0.3, 1);
-
-  &:after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: -0.3rem;
-    display: block;
-    width: calc(100% + 0.6rem);
-    height: 15px;
-    background-color: var(--accent-color);
-    opacity: 0.125;
-    transform: scale(0, 1);
-    transform-origin: left;
-    transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
-    z-index: -1;
-  }
+  transition: color 0.5s cubic-bezier(0.2, 1, 0.3, 1),
+    background-size 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+  background-image: linear-gradient(
+    to bottom,
+    transparent 50%,
+    var(--accent-transparent) 50%
+  );
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
 
   @media (hover) {
     &:hover,
     &:focus-within {
       color: var(--accent-color);
-
-      &:after {
-        transform: scale(1, 1);
-      }
+      background-size: 100% 100%;
     }
   }
 }

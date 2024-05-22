@@ -173,8 +173,9 @@
       a {
         position: relative;
         display: block;
+        background-image: none;
 
-        &:after {
+        &:before, &:after {
           content: "";
           position: absolute;
           top: -0.6rem;
@@ -192,14 +193,22 @@
           z-index: -1;
         }
 
+        &:before {
+          background: white;
+        }
+
         &:hover, &:focus-within {
           svg path {
             fill: var(--brand-color);
           }
 
-          &:after {
+          &:before, &:after {
             opacity: 0.25;
             transform: scale(1, 1);
+          }
+
+          &:before {
+            opacity: 0.75;
           }
         }
       }
