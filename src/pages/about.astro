@@ -3,8 +3,7 @@ import Main from "../layouts/Main.astro";
 const pageTitle = "About me | Joanna Hosking - Web Developer";
 import { Image } from "astro:assets";
 import me from "../assets/images/me.jpg";
-const igRes = await fetch("https://feeds.behold.so/cXKKK7y6nxKVE2io1XFe");
-const igData = await igRes.json();
+import IgFeed from "../components/IgFeed";
 const expertise = [
   "html",
   "css/sass",
@@ -41,17 +40,7 @@ const expertise = [
       in the West Midlands. I love diving into new technologies and have a particular
       fondness for the latest CSS features hiding behind experimental flags.
     </p>
-    <ul class="ig-feed">
-      {
-        igData.posts.map((post) => (
-          <li>
-            <a href={post.permalink} class="ig-post">
-              <img src={post.sizes.small.mediaUrl} alt={post.caption} />
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+    <IgFeed client:load />
     <p>
       When I'm not writing code, you'll likely find me sunbathing in the garden
       with my dog, gaming with my husband, or strumming the guitar.
@@ -101,25 +90,6 @@ const expertise = [
       width: 100%;
       height: auto;
       aspect-ratio: 2 / 1;
-      object-fit: cover;
-    }
-  }
-
-  .ig-feed {
-    list-style-type: none;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
-    margin: 0 0 1rem;
-    padding: 0;
-
-    @media (min-width: 400px) {
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
-
-    img {
-      display: block;
-      aspect-ratio: 1 / 1;
       object-fit: cover;
     }
   }
