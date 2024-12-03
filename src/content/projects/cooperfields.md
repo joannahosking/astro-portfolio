@@ -2,7 +2,7 @@
 title: Cooperfields
 shortname: Cooperfields
 description: marketing agency website
-icon: "../../assets/icons/project-web.svg"
+icon: web
 sortOrder: 3
 ---
 

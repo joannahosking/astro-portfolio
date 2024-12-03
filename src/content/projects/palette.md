@@ -2,7 +2,7 @@
 title: Hue-shifted palette generator
 shortname: Palette generator
 description: hue-shifted palette generator for pixel art
-icon: "../../assets/icons/project-design.svg"
+icon: design
 sortOrder: 1
 ---
 

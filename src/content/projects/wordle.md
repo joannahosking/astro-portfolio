@@ -2,12 +2,11 @@
 title: Custom wordle builder
 shortname: Wordle builder
 description: tool to build sharable custom wordle games
-icon: "../../assets/icons/project-game.svg"
+icon: game
 sortOrder: 2
 ---
 
 - [View on Github &rarr;](https://github.com/joannahosking/wordle-builder)
-- [Visit demo &rarr;](https://wordle.joannahosking.com/)
 
 I generally work with MySQL and more recently SQLite, but I've been interested in learning Postgres and more specifically trying [Supabase](https://supabase.com/). I decided to build a quick Wordle clone as a front end where users can create their own puzzles to share.
 

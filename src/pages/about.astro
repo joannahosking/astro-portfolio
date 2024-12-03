@@ -3,15 +3,17 @@ import Main from "../layouts/Main.astro";
 const pageTitle = "About me | Joanna Hosking - Web Developer";
 import { Image } from "astro:assets";
 import me from "../assets/images/me.jpg";
-import IgFeed from "../components/IgFeed";
 const expertise = [
   "html",
   "css/sass",
   "javascript",
+  "typescript",
   "php",
   "wordpress",
   "react",
   "astro",
+  "motion",
+  "gsap",
   "express.js",
   "webpack",
   "git",
@@ -28,8 +30,7 @@ const expertise = [
       <Image src={me} alt="" />
     </figure>
     <p>
-      I'm a web developer based in the UK. You can currently find me building
-      bespoke Wordpress themes and plugins at <a
+      I'm a web developer based in the UK. You can currently find me working at <a
         href="https://cooperfields.co.uk"
         target="_blank"
         rel="noreferrer">Cooperfields</a
@@ -38,9 +39,8 @@ const expertise = [
     <p>
       I'm a University of Arizona alumni <em>(go Wildcats!)</em> and am now based
       in the West Midlands. I love diving into new technologies and have a particular
-      fondness for the latest CSS features hiding behind experimental flags.
+      fondness for spotting progressive enhancement in the wild.
     </p>
-    <IgFeed client:load />
     <p>
       When I'm not writing code, you'll likely find me sunbathing in the garden
       with my dog, gaming with my husband, or strumming the guitar.
@@ -152,20 +152,81 @@ const expertise = [
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   gsap.registerPlugin(ScrollTrigger);
 
-  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    const figure = document.querySelector(".scroll");
-    const img = figure.querySelector("img");
+  function initScrollAnimation() {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const figure = document.querySelector(".scroll") as HTMLElement;
+    const img = figure?.querySelector("img") as HTMLElement;
+
+    if (!figure || !img) return;
 
     gsap.to(img, {
       scrollTrigger: {
         trigger: figure,
-        start: "top 50%",
+        start: "top top",
         end: "bottom top",
         scrub: 1.5,
         invalidateOnRefresh: true,
+        markers: false,
       },
       y: figure.offsetHeight - img.offsetHeight,
       ease: "none",
     });
   }
+
+  function initListAnimation() {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const listItems = document.querySelectorAll(
+      ".expertise li"
+    ) as NodeListOf<HTMLElement>;
+    const strength = 3;
+    const closeness = 200;
+
+    window.addEventListener("mousemove", (e: MouseEvent) => {
+      listItems.forEach((item) => {
+        const rect = item.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const dx = e.clientX - centerX;
+        const dy = e.clientY - centerY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < closeness) {
+          const angle = Math.atan2(dy, dx);
+          const moveX =
+            -Math.cos(angle) * strength * (1 - distance / closeness);
+          const moveY =
+            -Math.sin(angle) * strength * (1 - distance / closeness);
+
+          gsap.to(item, {
+            scale: 1.02,
+            opacity: 0.9,
+            x: moveX,
+            y: moveY,
+            ease: "sine.out",
+            duration: 0.5,
+          });
+        } else {
+          gsap.to(item, {
+            scale: 1,
+            opacity: 1,
+            x: 0,
+            y: 0,
+            duration: 0.8,
+            ease: "sine.inOut",
+          });
+        }
+      });
+    });
+  }
+
+  initScrollAnimation();
+  initListAnimation();
+
+  document.addEventListener("astro:after-swap", () => {
+    ScrollTrigger.refresh();
+    initScrollAnimation();
+    initListAnimation();
+  });
 </script>

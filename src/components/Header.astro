@@ -67,21 +67,21 @@
     </li>
     <li>
       <a
-        href="https://mastodon.social/@_tankgrrl"
+        href="https://bsky.app/profile/hellotank.bsky.social"
         target="_blank"
-        style="--brand-color: #6364FF"
-        aria-label="Mastodon"
+        style="--brand-color: #1185fe"
+        aria-label="Bluesky"
       >
-        <title>Mastodon</title>
+        <title>Bluesky</title>
         <svg
           width="22"
-          height="24"
-          viewBox="0 0 22 24"
+          height="22"
+          viewBox="0 0 512 512"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M15.667 18.1135C18.5836 17.7635 21.1386 15.9669 21.5003 14.3219C21.8264 12.2302 21.9824 10.1155 21.967 7.99855C21.8853 2.93521 18.5603 1.50021 18.5603 1.50021C16.1353 0.642291 13.5711 0.246567 11.0003 0.333547C8.42952 0.246567 5.86523 0.642291 3.44029 1.50021C3.44029 1.50021 0.126953 2.93521 0.126953 7.99855V12.0119C0.24362 16.9585 1.03695 21.8352 5.61029 23.0485C7.36288 23.5388 9.18221 23.7475 11.0003 23.6669C12.426 23.6291 13.83 23.3079 15.1303 22.7219L15.0486 20.8085C13.7342 21.1906 12.3687 21.3677 11.0003 21.3335C8.90029 21.2635 6.67195 21.1119 6.33362 18.5335C6.31548 18.2889 6.31548 18.0432 6.33362 17.7985C7.86736 18.1468 9.4291 18.3577 11.0003 18.4285C12.562 18.4561 14.1231 18.3507 15.667 18.1135ZM8.03695 6.68021C6.98695 6.68021 6.46195 7.31021 6.46195 8.57021V14.5202H4.00029V8.38355C3.94245 7.3044 4.28289 6.24159 4.95695 5.39688C5.27695 5.02165 5.67641 4.7223 6.12638 4.52052C6.57636 4.31874 7.06559 4.21957 7.55862 4.23021C8.11052 4.20059 8.66041 4.31778 9.15227 4.56986C9.64413 4.82194 10.0604 5.19989 10.3586 5.66521L10.9653 6.68021L11.572 5.66521C11.8702 5.19989 12.2864 4.82194 12.7783 4.56986C13.2702 4.31778 13.8201 4.20059 14.372 4.23021C14.865 4.21957 15.3542 4.31874 15.8042 4.52052C16.2542 4.7223 16.6536 5.02165 16.9736 5.39688C17.6728 6.23156 18.0385 7.29539 18.0003 8.38355V14.5202H15.5386V8.57021C15.5386 7.31021 15.0136 6.68021 13.9636 6.68021C12.797 6.68021 12.202 7.42688 12.202 8.92021V12.1752H9.83362V8.92021C9.83362 7.42688 9.20362 6.68021 8.03695 6.68021Z"
+            d="M111.8 62.2C170.2 105.9 233 194.7 256 242.4c23-47.6 85.8-136.4 144.2-180.2c42.1-31.6 110.3-56 110.3 21.8c0 15.5-8.9 130.5-14.1 149.2C478.2 298 412 314.6 353.1 304.5c102.9 17.5 129.1 75.5 72.5 133.5c-107.4 110.2-154.3-27.6-166.3-62.9l0 0c-1.7-4.9-2.6-7.8-3.3-7.8s-1.6 3-3.3 7.8l0 0c-12 35.3-59 173.1-166.3 62.9c-56.5-58-30.4-116 72.5-133.5C100 314.6 33.8 298 15.7 233.1C10.4 214.4 1.5 99.4 1.5 83.9c0-77.8 68.2-53.4 110.3-21.8z"
             fill="black"></path>
         </svg>
       </a>
@@ -175,7 +175,8 @@
         display: block;
         background-image: none;
 
-        &:before, &:after {
+        &:before,
+        &:after {
           content: "";
           position: absolute;
           top: -0.6rem;
@@ -197,12 +198,14 @@
           background: white;
         }
 
-        &:hover, &:focus-within {
+        &:hover,
+        &:focus-within {
           svg path {
             fill: var(--brand-color);
           }
 
-          &:before, &:after {
+          &:before,
+          &:after {
             opacity: 0.25;
             transform: scale(1, 1);
           }
@@ -224,58 +227,72 @@
 <script>
   import { gsap } from "gsap";
 
-  const logo = document.querySelector(".logo");
-
-  logo.addEventListener("mouseenter", (e) => {
-    gsap.to("#cursor", {
-      width: "4rem",
-      height: "4rem",
-      marginTop: "-2rem",
-      marginLeft: "-2rem",
-      opacity: 0.25,
-      duration: 0.25,
-    });
-
-    gsap.to(logo, {
-      scale: 1.1,
-      ease: "bounce.out",
-      duration: 1,
-    });
+  document.addEventListener("astro:after-swap", () => {
+    initLogoAnimation();
+    initSocialLinkAnimation();
   });
 
-  logo.addEventListener("mouseleave", (e) => {
-    gsap.to("#cursor", {
-      width: "0.75rem",
-      height: "0.75rem",
-      marginTop: "-0.4rem",
-      marginLeft: "-0.4rem",
-      opacity: 1,
-      duration: 0.25,
-    });
+  initLogoAnimation();
+  initSocialLinkAnimation();
 
-    gsap.to(logo, {
-      scale: 1,
-      ease: "bounce.out",
-      duration: 1,
-    });
-  });
+  function initLogoAnimation() {
+    const logo = document.querySelector(".logo");
+    if (!logo) return;
 
-  const socialLinks = gsap.utils.toArray(".social a");
-
-  socialLinks.forEach((link) => {
-    link.addEventListener("mouseenter", (e) => {
+    logo.addEventListener("mouseenter", (e) => {
       gsap.to("#cursor", {
-        width: 0,
-        height: 0,
+        width: "4rem",
+        height: "4rem",
+        marginTop: "-2rem",
+        marginLeft: "-2rem",
+        opacity: 0.25,
         duration: 0.25,
       });
+
+      gsap.to(logo, {
+        scale: 1.1,
+        ease: "bounce.out",
+        duration: 1,
+      });
     });
-    link.addEventListener("mouseleave", (e) => {
+
+    logo.addEventListener("mouseleave", (e) => {
       gsap.to("#cursor", {
         width: "0.75rem",
         height: "0.75rem",
+        marginTop: "-0.4rem",
+        marginLeft: "-0.4rem",
+        opacity: 1,
         duration: 0.25,
       });
+
+      gsap.to(logo, {
+        scale: 1,
+        ease: "bounce.out",
+        duration: 1,
+      });
     });
-  });
+  }
+
+  function initSocialLinkAnimation() {
+    const socialLinks = gsap.utils.toArray(".social a");
+
+    socialLinks.forEach((link: HTMLElement) => {
+      link.addEventListener("mouseenter", (e) => {
+        gsap.to("#cursor", {
+          width: 0,
+          height: 0,
+          duration: 0.25,
+        });
+      });
+
+      link.addEventListener("mouseleave", (e) => {
+        gsap.to("#cursor", {
+          width: "0.75rem",
+          height: "0.75rem",
+          duration: 0.25,
+        });
+      });
+    });
+  }
 </script>

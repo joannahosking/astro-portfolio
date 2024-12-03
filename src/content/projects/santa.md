@@ -2,11 +2,11 @@
 title: Santa dash pixel christmas card
 shortname: Santa dash
 description: pixel game christmas card
-icon: "../../assets/icons/project-game.svg"
+icon: game
 sortOrder: 4
 ---
 
-- [Visit project &rarr;](https://christmas.cooperfields.co.uk/)
+- [Play now &rarr;](https://christmas.cooperfields.co.uk/)
 
 Every year, we put out a Christmas card for our clients at work. It's usually a message wishing them a happy holiday season, but for 2023 we decided to do something a bit more creative.
 

@@ -1,4 +1,5 @@
 ---
+import { ClientRouter } from "astro:transitions";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
@@ -12,10 +13,14 @@ const { pageTitle } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
-    <meta name="description" content="Portfolio of web developer Joanna Hosking" />
+    <meta
+      name="description"
+      content="Portfolio of web developer Joanna Hosking"
+    />
+    <ClientRouter />
   </head>
   <body>
-    <div id="cursor"></div>
+    <div id="cursor" transition:persist></div>
     <div id="container">
       <Header />
       <main class="page-content">
@@ -29,37 +34,48 @@ const { pageTitle } = Astro.props;
 <script>
   import { gsap } from "gsap";
 
-  gsap.set("#cursor", {
-    marginTop: "-0.4rem",
-    marginLeft: "-0.4rem",
-  });
+  function initCursorAnimation() {
+    const cursor = document.querySelector("#cursor");
+    if (!cursor) return;
 
-  window.addEventListener("mousemove", (e) => {
-    gsap.to("#cursor", {
-      x: e.pageX,
-      y: e.pageY,
-      duration: 0.75,
+    gsap.set(cursor, {
+      marginTop: "-0.4rem",
+      marginLeft: "-0.4rem",
     });
-  });
 
-  const plainLinks = gsap.utils.toArray("a:not([class])");
-
-  plainLinks.forEach((link) => {
-    link.addEventListener("mouseenter", (e) => {
-      gsap.to("#cursor", {
-        width: 0,
-        height: 0,
-        backgroundColor: "var(--accent-color)",
-        duration: 0.25,
+    window.addEventListener("mousemove", (e) => {
+      gsap.to(cursor, {
+        x: e.pageX,
+        y: e.pageY,
+        duration: 0.75,
       });
     });
-    link.addEventListener("mouseleave", (e) => {
-      gsap.to("#cursor", {
-        width: "0.75rem",
-        height: "0.75rem",
-        backgroundColor: "var(--alt-color)",
-        duration: 0.25,
+
+    const plainLinks = gsap.utils.toArray("a:not([class])");
+    plainLinks.forEach((link: HTMLElement) => {
+      link.addEventListener("mouseenter", () => {
+        gsap.to(cursor, {
+          width: 0,
+          height: 0,
+          backgroundColor: "var(--accent-color)",
+          duration: 0.25,
+        });
+      });
+
+      link.addEventListener("mouseleave", () => {
+        gsap.to(cursor, {
+          width: "0.75rem",
+          height: "0.75rem",
+          backgroundColor: "var(--alt-color)",
+          duration: 0.25,
+        });
       });
     });
+  }
+
+  initCursorAnimation();
+
+  document.addEventListener("astro:after-swap", () => {
+    initCursorAnimation();
   });
 </script>

@@ -5,6 +5,14 @@ import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 const allProjects = await getCollection("projects");
 allProjects.sort((a, b) => (a.data.sortOrder < b.data.sortOrder ? -1 : 1));
+import iconWeb from "../assets/icons/project-web.svg";
+import iconGame from "../assets/icons/project-game.svg";
+import iconDesign from "../assets/icons/project-design.svg";
+const iconMap = {
+  web: iconWeb,
+  game: iconGame,
+  design: iconDesign,
+};
 // const allPosts = await getCollection("posts");
 // allPosts.sort((a, b) => (a.data.pubDate > b.data.pubDate ? -1 : 1));
 ---
@@ -14,7 +22,8 @@ allProjects.sort((a, b) => (a.data.sortOrder < b.data.sortOrder ? -1 : 1));
     <h1>👋🏼<br />Hello, I'm Joanna.</h1>
     <p>
       I'm a web developer in the West Midlands, cultivating this small digital
-      garden. <a href="/about">Learn more &rarr;</a></p>
+      garden. <a href="/about">Learn more &rarr;</a>
+    </p>
   </section>
   <section class="projects">
     <h2>Selected projects</h2>
@@ -24,7 +33,7 @@ allProjects.sort((a, b) => (a.data.sortOrder < b.data.sortOrder ? -1 : 1));
           <li>
             <p>
               <figure class="icon">
-                <Image src={project.data.icon} alt="" />
+                <Image src={iconMap[project.data.icon as string]} alt="" width="22" height="22" />
               </figure>{" "}
               <a href={`/projects/${project.slug}`}>{project.data.shortname}</a>
               : {project.data.description}
@@ -57,7 +66,8 @@ allProjects.sort((a, b) => (a.data.sortOrder < b.data.sortOrder ? -1 : 1));
   <section class="contact">
     <h2>Let's chat...</h2>
     <p>
-      <a href="mailto:hello@joannahosking.com">hello@joannahosking.com &rarr;</a>
+      <a href="mailto:hello@joannahosking.com">hello@joannahosking.com &rarr;</a
+      >
     </p>
   </section>
 </Main>
@@ -143,29 +153,40 @@ allProjects.sort((a, b) => (a.data.sortOrder < b.data.sortOrder ? -1 : 1));
 <script>
   import { gsap } from "gsap";
 
-  const blogItems = gsap.utils.toArray(".blog li a");
+  function initCursorAnimation() {
+    const blogItems = gsap.utils.toArray(".blog li a");
+    const cursor = document.querySelector("#cursor");
 
-  blogItems.forEach((item) => {
-    item.addEventListener("mouseenter", (e) => {
-      gsap.to("#cursor", {
-        width: "2rem",
-        height: "2rem",
-        backgroundColor: "var(--accent-color)",
-        opacity: 0.25,
-        duration: 0.25,
-        zIndex: -1,
+    if (!cursor) return;
+
+    blogItems.forEach((item: HTMLElement) => {
+      item.addEventListener("mouseenter", () => {
+        gsap.to(cursor, {
+          width: "2rem",
+          height: "2rem",
+          backgroundColor: "var(--accent-color)",
+          opacity: 0.25,
+          duration: 0.25,
+          zIndex: -1,
+        });
+      });
+
+      item.addEventListener("mouseleave", () => {
+        gsap.to(cursor, {
+          width: "0.75rem",
+          height: "0.75rem",
+          backgroundColor: "var(--alt-color)",
+          opacity: 1,
+          duration: 0.25,
+          zIndex: 1,
+        });
       });
     });
+  }
 
-    item.addEventListener("mouseleave", (e) => {
-      gsap.to("#cursor", {
-        width: "0.75rem",
-        height: "0.75rem",
-        backgroundColor: "var(--alt-color)",
-        opacity: 1,
-        duration: 0.25,
-        zIndex: 1,
-      });
-    });
+  initCursorAnimation();
+
+  document.addEventListener("astro:after-swap", () => {
+    initCursorAnimation();
   });
 </script>
