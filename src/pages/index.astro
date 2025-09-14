@@ -33,7 +33,7 @@ const iconMap = {
           <li>
             <p>
               <figure class="icon">
-                <Image src={iconMap[project.data.icon as string]} alt="" width="22" height="22" />
+                <Image src={iconMap[project.data.icon as string]} alt="" width="22" height="22" loading="lazy" decoding="async" />
               </figure>{" "}
               <a href={`/projects/${project.slug}`}>{project.data.shortname}</a>
               : {project.data.description}
