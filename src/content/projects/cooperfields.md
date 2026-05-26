@@ -3,7 +3,7 @@ title: Cooperfields
 shortname: Cooperfields
 description: marketing agency website
 icon: web
-sortOrder: 3
+sortOrder: 2
 ---
 
 - [Visit site &rarr;](https://cooperfields.co.uk)

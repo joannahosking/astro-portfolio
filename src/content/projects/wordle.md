@@ -3,7 +3,7 @@ title: Custom wordle builder
 shortname: Wordle builder
 description: tool to build sharable custom wordle games
 icon: game
-sortOrder: 2
+sortOrder: 4
 ---
 
 - [View on Github &rarr;](https://github.com/joannahosking/wordle-builder)

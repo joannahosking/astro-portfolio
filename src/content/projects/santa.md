@@ -3,7 +3,7 @@ title: Santa dash pixel christmas card
 shortname: Santa dash
 description: pixel game christmas card
 icon: game
-sortOrder: 4
+sortOrder: 3
 ---
 
 - [Play now &rarr;](https://christmas.cooperfields.co.uk/)
