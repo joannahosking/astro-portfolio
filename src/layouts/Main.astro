@@ -51,8 +51,8 @@ const { pageTitle } = Astro.props;
       });
     });
 
-    const plainLinks = gsap.utils.toArray("a:not([class])");
-    plainLinks.forEach((link: HTMLElement) => {
+    const plainLinks = gsap.utils.toArray<HTMLElement>("a:not([class])");
+    plainLinks.forEach((link) => {
       link.addEventListener("mouseenter", () => {
         gsap.to(cursor, {
           width: 0,
