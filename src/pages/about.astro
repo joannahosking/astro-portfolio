@@ -9,6 +9,7 @@ const expertise = [
   "php",
   "wordpress",
   "react",
+  "nextjs",
   "astro",
   "gsap",
   "motion",
@@ -26,10 +27,10 @@ const expertise = [
     <h1>About me</h1>
     <p>
       I'm a web developer based in the UK, currently working at <a
-        href="https://cooperfields.co.uk"
+        href="https://www.ebydesign.co.uk/"
         target="_blank"
-        rel="noreferrer">Cooperfields</a
-      >, where I lead development on client websites and digital projects.
+        rel="noreferrer">EBY</a
+      >.
     </p>
     <p>
       Over the past 7+ years, I've worked across agency and freelance roles,
@@ -38,7 +39,7 @@ const expertise = [
       process, from planning, UX, and architecture through to build and launch.
     </p>
     <p>
-      I'm particularly interested in performance and progressive enhancement,
+      I'm particularly interested in accessibility and progressive enhancement,
       and I enjoy exploring how modern tools can improve both developer and user
       experience.
     </p>
@@ -97,7 +98,7 @@ const expertise = [
     margin-top: 2rem;
     border-radius: 50%;
     overflow: hidden;
-    
+
     img {
       width: 100%;
       height: 100%;
@@ -105,10 +106,14 @@ const expertise = [
     }
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at center, transparent 50%, var(--text-color) 100%);
+      background: radial-gradient(
+        circle at center,
+        transparent 50%,
+        var(--text-color) 100%
+      );
       opacity: 0;
       cursor: none;
       transition: opacity 0.3s ease-in-out;

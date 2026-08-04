@@ -3,7 +3,7 @@ title: Santa dash pixel christmas card
 shortname: Santa dash
 description: pixel game christmas card
 icon: game
-sortOrder: 3
+sortOrder: 5
 ---
 
 - [Play now &rarr;](https://christmas.cooperfields.co.uk/)
@@ -17,4 +17,4 @@ Santa Dash is a simple pixel game built in canvas where the user collects coins 
 
 ![Gameplay demo](../../assets/projectImages/santa-game.gif)
 
-We're hoping to reskin for the upcoming year and add a leaderboard. In the meantime, I'd [love to hear](mailto:hello@joannahosking.com) your highscore!
+Each year it enjoys an annual reskin. I'd [love to hear](mailto:hello@joannahosking.com) your highscore!

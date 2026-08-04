@@ -1,15 +1,15 @@
 ---
 title: Hue-shifted palette generator
 shortname: Palette generator
-description: hue-shifted palette generator for pixel art
+description: hue-shifted palette generator
 icon: design
-sortOrder: 1
+sortOrder: 2
 ---
 
 - [View on Github &rarr;](https://github.com/joannahosking/palette-generator)
 - [Visit demo &rarr;](https://palette.joannahosking.com/)
 
-As I enjoy pixel art as a hobby, this tool was built in React to assist with making palette choices that would enhance depth and contrast in my projects. While there is much more to [colour theory](https://pixelparmesan.com/color-theory-for-pixel-artists-its-all-relative/), I've found hue shifting to be a good starting point for a novice in building palettes. The general idea is that highlighted areas have warmer values, and shadows have cooler values.
+As I enjoy pixel art as a hobby, this tool was built to assist with making palette choices that would enhance depth and contrast in my projects. While there is much more to [colour theory](https://pixelparmesan.com/color-theory-for-pixel-artists-its-all-relative/), I've found hue shifting to be a good starting point for a novice in building palettes. The general idea is that highlighted areas have warmer values, and shadows have cooler values.
 
 ![Screenshot](../../assets/projectImages/palette-generator.png)
 
@@ -24,3 +24,5 @@ The project utilises the _chroma-js_ package to calculate the LCH value of the s
 *The primary colour is adjusted with an HTML colour input.*
 
 Visually, the colour picker and 'copy to clipboard' icons became an accessibility challenge as a dark or light icon wouldn't meet readability standards toward their respective lightness. Thanks to LCH measuring relative lightness, the swatch component is able to simply measure the lightness value  of each shade and choose an icon fill colour appropriately. This can be seen in the screenshot above.
+
+I recently rebuilt the project in Next.js as an exercise. The most useful addition since has been exporting a generated palette straight to Procreate. Procreate reads palettes from a `.swatches` file, which is really just a JSON structure zipped up with a specific internal layout, so the export button builds that structure from the current palette state in the browser and triggers a download, no server involved. It's saved me a fair amount of manual swatch-building time mid-project, which was the actual motivation for adding it.
