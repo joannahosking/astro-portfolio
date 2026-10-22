@@ -11,9 +11,9 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
-    "@astrojs/preact": "^6.0.2",
+    "@astrojs/preact": "^6.1.0",
     "@astrojs/sitemap": "^3.7.3",
-    "astro": "^7.1.6",
+    "astro": "^7.4.1",
     "gsap": "^3.12.5",
     "preact": "^10.23.0",
     "typescript": "^6.0.3"
