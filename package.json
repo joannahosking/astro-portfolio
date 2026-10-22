@@ -15,7 +15,7 @@
     "@astrojs/sitemap": "^3.7.3",
     "astro": "^7.1.6",
     "gsap": "^3.12.5",
-    "preact": "^10.23.0",
+    "preact": "^11.0.1",
     "typescript": "^6.0.3"
   }
 }
