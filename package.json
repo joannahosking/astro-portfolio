@@ -16,6 +16,6 @@
     "astro": "^7.4.1",
     "gsap": "^3.12.5",
     "preact": "^11.0.1",
-    "typescript": "^6.0.3"
+    "typescript": "^7.0.2"
   }
 }
